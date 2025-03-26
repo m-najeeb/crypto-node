@@ -13,6 +13,10 @@ class ExpenseQueries {
   async getExpensesByCategory(category) {
     return await ExpenseSchema.find({ category }).lean();
   }
+
+  async getExpensesByPaymentMethod(paymentMethod) {
+    return await ExpenseSchema.find({ paymentMethod }).lean();
+  }
 }
 
 module.exports = new ExpenseQueries();

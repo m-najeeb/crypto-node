@@ -63,6 +63,23 @@ class ExpenseController {
       );
     }
   }
+
+  async getExpensesByPaymentMethod(req, res) {
+    try {
+      const { paymentMethod } = req.params;
+      const response = await expenseImplementation.getExpensesByPaymentMethod(
+        paymentMethod
+      );
+      res.status(ResponseService.status).send(response);
+    } catch (error) {
+      ResponseService.status = constants.CODE.INTERNAL_SERVER_ERROR;
+      return ResponseService.responseService(
+        constants.STATUS.EXCEPTION,
+        error.message,
+        messages.EXCEPTION
+      );
+    }
+  }
 }
 
 module.exports = new ExpenseController();
