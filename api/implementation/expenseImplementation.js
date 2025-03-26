@@ -32,7 +32,7 @@ class ExpenseImplementation {
       const expenses = await ExpenseQueries.getAllExpenses();
 
       const decryptedExpenses = expenses.map((expense) => {
-        expense.amount = decrypt(expense.amount);
+        expense.amount = Number(decrypt(expense.amount));
         return expense;
       });
 
