@@ -46,6 +46,23 @@ class ExpenseController {
       );
     }
   }
+
+  async getExpensesByCategory(req, res) {
+    try {
+      const { category } = req.params;
+      const response = await expenseImplementation.getExpensesByCategory(
+        category
+      );
+      res.status(ResponseService.status).send(response);
+    } catch (error) {
+      ResponseService.status = constants.CODE.INTERNAL_SERVER_ERROR;
+      return ResponseService.responseService(
+        constants.STATUS.EXCEPTION,
+        error.message,
+        messages.EXCEPTION
+      );
+    }
+  }
 }
 
 module.exports = new ExpenseController();

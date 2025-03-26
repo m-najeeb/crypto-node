@@ -51,6 +51,31 @@ class ExpenseImplementation {
       );
     }
   }
+
+  async getExpensesByCategory(category) {
+    try {
+      const expenses = await ExpenseQueries.getExpensesByCategory(category);
+
+      const decryptedExpenses = expenses.map((expense) => {
+        expense.amount = Number(decrypt(expense.amount));
+        return expense;
+      });
+
+      ResponseService.status = constants.CODE.OK;
+      return ResponseService.responseService(
+        constants.STATUS.SUCCESS,
+        decryptedExpenses,
+        messages.DATA_FETCHED_SUCCESSFULLY
+      );
+    } catch (error) {
+      ResponseService.status = constants.CODE.INTERNAL_SERVER_ERROR;
+      return ResponseService.responseService(
+        constants.STATUS.EXCEPTION,
+        error.message,
+        messages.EXCEPTION
+      );
+    }
+  }
 }
 
 module.exports = new ExpenseImplementation();
