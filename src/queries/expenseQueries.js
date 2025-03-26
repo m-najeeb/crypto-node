@@ -7,7 +7,7 @@ class ExpenseQueries {
   }
 
   async getAllExpenses() {
-    return await ExpenseSchema.find({});
+    return await ExpenseSchema.find({}).lean();
   }
 }
 

@@ -26,6 +26,31 @@ class ExpenseImplementation {
       );
     }
   }
+
+  async getAllExpenses() {
+    try {
+      const expenses = await ExpenseQueries.getAllExpenses();
+
+      const decryptedExpenses = expenses.map((expense) => {
+        expense.amount = decrypt(expense.amount);
+        return expense;
+      });
+
+      ResponseService.status = constants.CODE.OK;
+      return ResponseService.responseService(
+        constants.STATUS.SUCCESS,
+        decryptedExpenses,
+        messages.DATA_FETCHED_SUCCESSFULLY
+      );
+    } catch (error) {
+      ResponseService.status = constants.CODE.INTERNAL_SERVER_ERROR;
+      return ResponseService.responseService(
+        constants.STATUS.EXCEPTION,
+        error.message,
+        messages.EXCEPTION
+      );
+    }
+  }
 }
 
 module.exports = new ExpenseImplementation();
