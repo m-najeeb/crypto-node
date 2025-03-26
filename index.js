@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mongoSanitize = require("express-mongo-sanitize");
-const helmet = require("helmet");
 
 const setup = require("./api/routes");
 
@@ -15,8 +13,6 @@ const dbUri = process.env.MONGO_URI;
 
 // Middleware setup
 app.use(express.json());
-app.use(helmet()); // Set security HTTP headers
-app.use(mongoSanitize()); // Sanitize MongoDB queries
 app.use(cors()); // Enable CORS
 app.options("*", cors()); // Handle preflight requests
 app.use(bodyParser.json()); // Parse JSON bodies
