@@ -6,4 +6,5 @@ module.exports = {
   NO_EXPENSES_IN_THIS_CATEGORY: "No Expenses In This Category",
   NO_EXPENSES_USING_THIS_PAYMENT_METHOD: "No Expeses Using This Paymet Method",
   SUCCESSFULLY_ADDED: "Successfully Added",
+  SUCCESSFULLY_SENT: "Successfully Sent",
 };
