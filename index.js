@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-const cors = require("cors");
 
 const setup = require("./api/routes");
 
@@ -13,8 +12,6 @@ const dbUri = process.env.MONGO_URI;
 
 // Middleware setup
 app.use(express.json());
-app.use(cors()); // Enable CORS
-app.options("*", cors()); // Handle preflight requests
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
