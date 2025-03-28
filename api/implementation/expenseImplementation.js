@@ -45,6 +45,11 @@ class ExpenseImplementation {
         return expense;
       });
 
+      // const decryptedExpenses = expenses.map((expense) => ({
+      //   ...expense.toObject(),
+      //   amount: parseFloat(decrypt(expense.amount))
+      // })); //if we dont wanna use lean() in queries,
+
       ResponseService.status = constants.CODE.OK;
       return ResponseService.responseService(
         constants.STATUS.SUCCESS,
